@@ -16,7 +16,7 @@ from sentence_transformers import SentenceTransformer
 
 
 emb_model = SentenceTransformer('sentence-transformers/all-MiniLM-L6-v2', 
-                                        token=st.secrets["HuggingFace_API_KEY"])
+                                        token=st.secrets["HF_TOKEN"])
 
 # Access the secret using userdata.get()
 genai.configure(api_key=st.secrets["GEMINI_API_KEY"])
@@ -147,4 +147,5 @@ def make_rag_prompt(query, context):
 
 
     
+
 

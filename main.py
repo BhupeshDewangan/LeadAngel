@@ -73,33 +73,46 @@ def get_data(clean_text, question_ans):
 # if __name__ == "__main__":
 #     st.set_page_config(page_title="Generate Q&A from Website", page_icon="🤖")
 #     st.title("Generate Q&A from Website")
-
-#     # sidebar
+    
+#     # Initialize session state
+#     if "chat_history" not in st.session_state:
+#         st.session_state.chat_history = [
+#             {"role": "AI", "content": "Hello, I am a bot. How can I help you?"},
+#         ]
+#     if "show_question_box" not in st.session_state:
+#         st.session_state.show_question_box = False
+    
+#     # Sidebar for URL input and Next button
 #     with st.sidebar:
 #         st.header("Settings")
-#         website_url = st.text_input("Website URL")
-#         # question_ans = st.text_input("Number of Q&A pairs to generate", value="5")
-
-#     if website_url is None or website_url == "":
+#         website_url = st.text_input("Website URL", key="website_url_input")
+#         if st.button('Next'):
+#             # Clear chat history when URL is updated
+#             st.session_state.chat_history = []
+#             st.session_state.show_question_box = True
+    
+#     # Check if URL is provided
+#     if not website_url:
 #         st.info("Please enter a website URL")
-
 #     else:
-#         # session state
-#         if "chat_history" not in st.session_state:
-#             st.session_state.chat_history = [
-#                 {"role": "AI", "content": "Hello, I am a bot. How can I help you?"},
-#             ]
+#         # When next is clicked and URL is pasted, show question input box
+#         if st.session_state.show_question_box:
+#             user_query = st.text_input("Type your message here...", key="user_input")
 
-#         # user input
-#         user_query = st.text_input("Type your message here...")
-#         if user_query is not None and user_query != "":
-#             soup_data = soup(website_url)
-#             clean_text = remove_html_script_style_tags(str(soup_data))
-#             response = get_data(clean_text, user_query)
-#             st.session_state.chat_history.append({"role": "Human", "content": user_query})
-#             st.session_state.chat_history.append({"role": "AI", "content": response})
+            
+#             if user_query:
+#                 # Call your functions: soup, remove_html_script_style_tags, get_data
+#                 soup_data = soup(website_url)
+#                 clean_text = remove_html_script_style_tags(str(soup_data))
+#                 response = get_data(clean_text, user_query)
+#                 # Update chat history
+#                 # st.spinner("Processing...")
+#                 st.session_state.chat_history.append({"role": "Human", "content": user_query})
+#                 st.session_state.chat_history.append({"role": "AI", "content": response})
+#         else:
+#             st.info("Click 'Next' in the sidebar to start asking questions.")
 
-#         # conversation
+#         # Display chat history
 #         for message in st.session_state.chat_history:
 #             if message["role"] == "AI":
 #                 with st.chat_message("AI"):
@@ -108,55 +121,4 @@ def get_data(clean_text, question_ans):
 #                 with st.chat_message("Human"):
 #                     st.write(message["content"])
 
-
-if __name__ == "__main__":
-    st.set_page_config(page_title="Generate Q&A from Website", page_icon="🤖")
-    st.title("Generate Q&A from Website")
-    
-    # Initialize session state
-    if "chat_history" not in st.session_state:
-        st.session_state.chat_history = [
-            {"role": "AI", "content": "Hello, I am a bot. How can I help you?"},
-        ]
-    if "show_question_box" not in st.session_state:
-        st.session_state.show_question_box = False
-    
-    # Sidebar for URL input and Next button
-    with st.sidebar:
-        st.header("Settings")
-        website_url = st.text_input("Website URL", key="website_url_input")
-        if st.button('Next'):
-            # Clear chat history when URL is updated
-            st.session_state.chat_history = []
-            st.session_state.show_question_box = True
-    
-    # Check if URL is provided
-    if not website_url:
-        st.info("Please enter a website URL")
-    else:
-        # When next is clicked and URL is pasted, show question input box
-        if st.session_state.show_question_box:
-            user_query = st.text_input("Type your message here...", key="user_input")
-
-            
-            if user_query:
-                # Call your functions: soup, remove_html_script_style_tags, get_data
-                soup_data = soup(website_url)
-                clean_text = remove_html_script_style_tags(str(soup_data))
-                response = get_data(clean_text, user_query)
-                # Update chat history
-                # st.spinner("Processing...")
-                st.session_state.chat_history.append({"role": "Human", "content": user_query})
-                st.session_state.chat_history.append({"role": "AI", "content": response})
-        else:
-            st.info("Click 'Next' in the sidebar to start asking questions.")
-
-        # Display chat history
-        for message in st.session_state.chat_history:
-            if message["role"] == "AI":
-                with st.chat_message("AI"):
-                    st.write(message["content"])
-            elif message["role"] == "Human":
-                with st.chat_message("Human"):
-                    st.write(message["content"])
 

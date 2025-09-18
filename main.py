@@ -13,7 +13,7 @@ load_dotenv()
 import google.generativeai as genai
 
 # Access the secret using userdata.get()
-genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
+genai.configure(api_key=st.secrets["GEMINI_API_KEY"])
 model = genai.GenerativeModel(model_name="gemini-1.5-flash")
 
 
@@ -159,3 +159,4 @@ if __name__ == "__main__":
             elif message["role"] == "Human":
                 with st.chat_message("Human"):
                     st.write(message["content"])
+

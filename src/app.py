@@ -99,51 +99,52 @@ def generate_answer(chat_history, prompt):
 def make_rag_prompt(query, context):
     return f"Query: {query}\n\nContext:\n{context}\n\nAnswer:"
 
-if __name__ == "__main__":
+# if __name__ == "__main__":
 
-    print("model loading...")
-    emb_model = SentenceTransformer('sentence-transformers/all-MiniLM-L6-v2', 
-                            token=os.getenv("HuggingFace_API_KEY"))
+#     print("model loading...")
+#     emb_model = SentenceTransformer('sentence-transformers/all-MiniLM-L6-v2', 
+#                             token=os.getenv("HuggingFace_API_KEY"))
 
-    start_time = time.perf_counter()  # Start timing
+#     start_time = time.perf_counter()  # Start timing
 
-    soup_data = soup("https://docs.leadangel.com/en/sales-team/weighted-sales-team")
-    clean_text = remove_html_script_style_tags(str(soup_data))
+#     soup_data = soup("https://docs.leadangel.com/en/sales-team/weighted-sales-team")
+#     clean_text = remove_html_script_style_tags(str(soup_data))
 
-    chunks = split_documents_into_chunks(clean_text)
+#     chunks = split_documents_into_chunks(clean_text)
 
-    index = upsert_to_pinecone(chunks=chunks)
+#     index = upsert_to_pinecone(chunks=chunks)
 
-    print("start")
-    a = str(input("Enter your query: "))
+#     print("start")
+#     a = str(input("Enter your query: "))
 
-    query_embedding = emb_model.encode(a)
-    print(f"Query embedding: {len(query_embedding)}")
-    query_embedding_list = query_embedding.tolist()  # convert ndarray to list
-
-
-    query_response = index.query(
-        vector=query_embedding_list,
-        top_k=3,
-        include_metadata=True, 
-        include_values=True
-    )
-
-    # print(f"Query response: {query_response}")
-
-    relevant_text = query_response['matches'][0]['metadata']['text']
+#     query_embedding = emb_model.encode(a)
+#     print(f"Query embedding: {len(query_embedding)}")
+#     query_embedding_list = query_embedding.tolist()  # convert ndarray to list
 
 
-    chat_history = []
+#     query_response = index.query(
+#         vector=query_embedding_list,
+#         top_k=3,
+#         include_metadata=True, 
+#         include_values=True
+#     )
 
-    # Generate and print the final answer, maintaining chat history
-    prompt = make_rag_prompt(a, relevant_text)
-    answer = generate_answer(chat_history, prompt)
-    print("Answer:", answer)
+#     # print(f"Query response: {query_response}")
+
+#     relevant_text = query_response['matches'][0]['metadata']['text']
 
 
-    end_time = time.perf_counter()  # End timing
+#     chat_history = []
+
+#     # Generate and print the final answer, maintaining chat history
+#     prompt = make_rag_prompt(a, relevant_text)
+#     answer = generate_answer(chat_history, prompt)
+#     print("Answer:", answer)
+
+
+#     end_time = time.perf_counter()  # End timing
 
 
 
     
+

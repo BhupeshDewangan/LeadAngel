@@ -3,6 +3,7 @@ from langchain.text_splitter import RecursiveCharacterTextSplitter
 from pinecone import Pinecone, ServerlessSpec
 from main import get_data, remove_html_script_style_tags, soup
 import google.generativeai as genai
+import streamlit as st
 
 import os
 from dotenv import load_dotenv
@@ -142,6 +143,7 @@ if __name__ == "__main__":
 
 
     end_time = time.perf_counter()  # End timing
+
 
 
     

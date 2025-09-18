@@ -66,7 +66,7 @@ This project leverages Retrieval-Augmented Generation (RAG) to combine semantic 
 Open your terminal and enter:
 
 ```bash
-git clone https://github.com/yourusername/leadangel-ai-assistant.git
+git clone https://github.com/BhupeshDewangan/LeadAngel.git
 cd leadangel-ai-assistant
 ````
 

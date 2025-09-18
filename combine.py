@@ -116,16 +116,14 @@ else:
 
         with st.sidebar:
             with st.status("Downloading data...", expanded=True) as status:
-                st.write("Searching for data...")
-                time.sleep(2)
                 st.write("Found URL.")
                 time.sleep(1)
                 st.write("Extracting Data...")
-                time.sleep(2)
+                time.sleep(1)
                 st.write("Chunking...")
                 time.sleep(1)
-                st.write("Chunking... Embedding...and Uploading into Vector DB...")
-                time.sleep(1)
+                st.write("Embedding...Uploading into Vector DB...")
+                time.sleep(2)
                 st.write("RAG + Vector DB AI Ready")
                 time.sleep(1)
                 status.update(
@@ -169,5 +167,6 @@ else:
 
     st.button("Clear message", on_click = clear_conversation)
     display_chat_history()
+
 
 

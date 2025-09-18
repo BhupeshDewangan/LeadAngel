@@ -57,3 +57,47 @@ This project leverages Retrieval-Augmented Generation (RAG) to combine semantic 
 - Google Generative AI (Gemini) API key
 - Streamlit installed
 
+
+# LeadAngel AI Assistant Setup Guide
+
+## Step-by-Step Setup Guide
+
+### 1. Clone the GitHub Repository
+Open your terminal and enter:
+
+```bash
+git clone https://github.com/yourusername/leadangel-ai-assistant.git
+cd leadangel-ai-assistant
+````
+
+### 2. Set Up Python Environment
+
+Ensure Python 3.10+ is installed on your system. Create a virtual environment to keep dependencies isolated:
+```
+python -m venv venv
+```
+### 3. Install Project Requirements
+
+With the virtual environment activated, install the required Python packages:
+```
+pip install -r requirements.txt
+```
+This will automatically grab packages for Streamlit, Pinecone, Sentence Transformers, Langchain, Google API, BeautifulSoup, and more.
+
+### 4. Add API Keys and Environment Variables
+
+Create a .env file in the root folder and add:
+
+```
+PINECONE_API_KEY=your_pinecone_api_key
+GOOGLE_API_KEY=your_gemini_api_key
+```
+
+### 5. Run the App
+
+Start the Streamlit interface with:
+```
+streamlit run app.py
+```
+
+## FINISH !!!

@@ -90,8 +90,8 @@ def generate_answer(chat_history, prompt):
     full_prompt = f"{system_message}\n\n" + "\n".join(chat_history) + "\nAssistant:"
 
     # Generate the response and add it to the chat history
-    response = gen_model.generate_content(full_prompt).text
-    chat_history.append(f"Assistant: {response}")
+    response = gen_model.generate_content(full_prompt)
+    chat_history.append(f"Assistant: {response.text}")
     
     return response
 
@@ -147,5 +147,6 @@ def make_rag_prompt(query, context):
 
 
     
+
 
 
